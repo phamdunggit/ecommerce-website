@@ -1,0 +1,226 @@
+.cate-image {
+    width: 70px;
+    height: 70px;
+}
+.form-select {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.product-image {
+    height: 200px;
+}
+a {
+    text-decoration: none !important;
+    color: #212529 !important;
+}
+* {
+    font-family: "Roboto", sans-serif;
+}
+.checkout-form label {
+    font-size: 12px;
+    font-weight: 700;
+}
+.checkout-form input {
+    font-size: 14px;
+    padding: 5px;
+    font-weight: 400;
+}
+.order-details label {
+    font-size: 12px;
+    font-weight: 700;
+}
+.order-details div {
+    font-size: 14;
+    padding: 5px !important;
+}
+
+/* rating */
+.rating-css div {
+    color: #ffe400;
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 20px 0;
+}
+.rating-css input {
+    display: none;
+}
+.rating-css input + label {
+    font-size: 60px;
+    text-shadow: 1px 1px 0 #8f8420;
+    cursor: pointer;
+}
+.rating-css input:checked + label ~ label {
+    color: #b4afaf;
+}
+.rating-css label:active {
+    transform: scale(0.8);
+    transition: 0.3s ease;
+}
+
+/* End of Star Rating */
+
+.checked {
+    color: #ffd900;
+}
+.search-bar {
+    width: 40%;
+    margin: auto;
+    z-index: 1000;
+}
+/* .ui-menu{
+  z-index: 3500 !important;
+} */
+
+.search-input-wrapper {
+    background: #fff;
+    width: 100%;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
+}
+
+.search-input-wrapper input {
+    height: 50px;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0 60px 0 20px;
+    font-size: 18px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-input-wrapper.active input {
+    border-radius: 5px 5px 0 0;
+}
+
+.search-input-wrapper .autocom-box {
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.search-input-wrapper.active .autocom-box {
+    padding: 10px 8px;
+    opacity: 1;
+    pointer-events: auto;
+    background: #fff;
+    position: absolute;
+    width: 450px;
+}
+
+.autocom-box li {
+    list-style: none;
+    padding: 8px 12px;
+    display: none;
+    width: 100%;
+    cursor: default;
+    border-radius: 3px;
+}
+
+.search-input-wrapper.active .autocom-box li {
+    display: block;
+}
+.autocom-box li:hover {
+    background: #efefef;
+}
+
+.icon {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 50px;
+    width: 55px;
+    text-align: center;
+    line-height: 55px;
+    font-size: 20px;
+    color: #644bff;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+}
+.nav-ma {
+    margin-right: 150px !important;
+}
+h5 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+p.error {
+    color: red;
+}
+.avatar-upload {
+    position: relative;
+    max-width: 205px;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 20%;
+}
+.avatar-upload .avatar-edit {
+    position: absolute;
+    right: 74px;
+    z-index: 1;
+    top: 90px;
+}
+.avatar-upload .avatar-edit input {
+    display: none;
+}
+.avatar-upload .avatar-edit input + label {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 0;
+    border-radius: 100%;
+    background: #ffffff;
+    border: 1px solid #d2d6de;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    font-weight: normal;
+    transition: all 0.2s ease-in-out;
+}
+.avatar-upload .avatar-edit input + label:hover {
+    background: #f1f1f1;
+    border-color: #d6d6d6;
+}
+.avatar-upload .avatar-edit input + label:after {
+    content: "";
+    font-family: "FontAwesome";
+    color: #337ab7;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    line-height: 34px;
+    margin: auto;
+}
+.profile-user-img {
+    width: 125px;
+    margin: 0 auto;
+    padding: 3px;
+    border: 3px solid #d2d6de;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+}
+#image {
+    width: auto;
+    height: auto;
+  }
