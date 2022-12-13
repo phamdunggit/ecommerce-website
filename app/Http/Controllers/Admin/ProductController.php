@@ -214,7 +214,7 @@ class ProductController extends Controller
             ->where('products.name',"LIKE","%$search_prod%")
             ->orWhere('products.description',"LIKE","%$search_prod%")
             ->orWhere('categories.name',"LIKE","%$search_prod%")
-            ->get();
+            ->paginate(1);
             if($products){
                 return view('admin.product.search',compact('products'));
             }

@@ -7,12 +7,26 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+
 class CategoryController extends Controller
 {
     public function index()
     {
-        $category = Category::paginate(1);
+        $category = Category::orderby('id', 'asc')->paginate(1);
         return view('admin.category.index', compact('category'));
+    }
+    function fetch_data(Request $request)
+    {
+        if ($request->ajax()) {
+            $search = $request->get('query');
+            $search = str_replace(" ", "%", $search);
+            $sort_by = $request->get('sortby');
+            $sort_type = $request->get('sorttype');
+
+            $category = Category::where('name', "LIKE", "%$search%")->orWhere('description', "LIKE", "%$search%")->orderBy($sort_by, $sort_type)
+                ->paginate(1);
+            return view('admin.category.data', compact('category'))->render();
+        }
     }
     public function add()
     {
@@ -40,11 +54,11 @@ class CategoryController extends Controller
         // $category->popular = $request->input('popular') == TRUE ? '1' : '0';
         // $category->save();
         // return redirect('/categories')->with('status', "Category Added Successfully");
-            dd($request->image);
+        dd($request->image);
     }
     public function edit($slug)
     {
-        $category = Category::where('slug',$slug)->firstOrFail();
+        $category = Category::where('slug', $slug)->firstOrFail();
         return view('admin.category.edit', compact('category'));
     }
     public function update(Request $request, $slug)
@@ -53,7 +67,7 @@ class CategoryController extends Controller
             'name' => 'required|string|max:40|min:5',
             'description' => 'required|string|max:500|min:5',
         ]);
-        $category = Category::where('slug',$slug)->first();
+        $category = Category::where('slug', $slug)->first();
         if ($request->hasFile('image')) {
             $path = 'assets/uploads/category/' . $category->image;
             if (File::exists($path)) {
@@ -73,8 +87,8 @@ class CategoryController extends Controller
         return redirect('/categories')->with('status', "Category Updated Successfully");
     }
     public function destroy($slug)
-    {   
-        $category = Category::where('slug',$slug)->first();
+    {
+        $category = Category::where('slug', $slug)->first();
         if ($category->image) {
             $path = 'assets/uploads/category/' . $category->image;
             if (File::exists($path)) {
@@ -90,11 +104,12 @@ class CategoryController extends Controller
     }
     public function catesearch(Request $request)
     {
-        $search_cate=$request->cate_search;
-        if ($search_cate!='') {
-            $category=Category::where('name',"LIKE","%$search_cate%")->orWhere('description',"LIKE","%$search_cate%")->paginate(1);
-            if($category){
-                return view('admin.category.search',compact('category'));
+        $search = $request->cate_search;
+        if ($search != '') {
+            $search = str_replace(" ", "%", $search);
+            $category = Category::where('name', "LIKE", "%$search%")->orWhere('description', "LIKE", "%$search%")->orderby('id', 'asc')->paginate(1);
+            if ($category) {
+                return view('admin.category.search', compact('category', 'search'));
             }
         } else {
             return redirect()->back();

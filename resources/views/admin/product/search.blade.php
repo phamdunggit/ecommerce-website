@@ -41,7 +41,7 @@
                     <td>{{ $item->selling_price }}</td>
                     
                     <td><img src="{{ asset('assets/uploads/product/image/'.$item->image) }}" class="cate-image" alt="Image Here"></td>
-                    <td><i class="fa fa-xing" aria-hidden="true"></i>
+                    <td>
                         <a href="{{ url('/edit-product/'.$item->slug) }}" class="btn btn-primary">Edit</a>
                         <a href="{{ url('/delete-product/'.$item->slug) }}" class="btn btn-danger">Delete</a>
                     </td>
