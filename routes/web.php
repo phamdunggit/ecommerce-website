@@ -72,25 +72,26 @@ Route::middleware('auth','isAdmin','verified')->group(function(){
     Route::post('/categories-search','App\Http\Controllers\Admin\CategoryController@catesearch');
     //product
     Route::get('/products','App\Http\Controllers\Admin\ProductController@index');
+    Route::get('/products/fetch_data', 'App\Http\Controllers\Admin\ProductController@fetch_data');
     Route::get('/add-product','App\Http\Controllers\Admin\ProductController@add');
     Route::post('/insert-product','App\Http\Controllers\Admin\ProductController@insert');
     Route::get('/edit-product/{slug}','App\Http\Controllers\Admin\ProductController@edit');
     Route::put('/update-product/{slug}','App\Http\Controllers\Admin\ProductController@update');
     Route::get('/delete-product/{slug}','App\Http\Controllers\Admin\ProductController@destroy');
-    Route::get('/product-search','App\Http\Controllers\Admin\ProductController@search');
-    Route::post('/prod-search','App\Http\Controllers\Admin\ProductController@prodsearch');
+    Route::get('/products-search','App\Http\Controllers\Admin\ProductController@search');
+    Route::post('/products-search','App\Http\Controllers\Admin\ProductController@prodsearch');
     //User
     Route::get('/users','App\Http\Controllers\Admin\DashboardController@users');
     Route::get('/view-user/{id}','App\Http\Controllers\Admin\DashboardController@viewuser');
     Route::get('/user-search','App\Http\Controllers\Admin\DashboardController@search');
     Route::post('/users-search','App\Http\Controllers\Admin\DashboardController@usersearch');
-    Route::get('/user-search','App\Http\Controllers\Admin\DashboardController@search');
-    Route::post('/user-search','App\Http\Controllers\Admin\DashboardController@usersearch');
+    Route::get('/users-search','App\Http\Controllers\Admin\DashboardController@search');
+    Route::post('/users-search','App\Http\Controllers\Admin\DashboardController@usersearch');
     //Order
     Route::get('/orders','App\Http\Controllers\Admin\OrderController@index');
     Route::get('/admin/view-order/{id}','App\Http\Controllers\Admin\OrderController@view');
     Route::get('/order-history','App\Http\Controllers\Admin\OrderController@orderhistory');
     Route::put('/update-order/{id}','App\Http\Controllers\Admin\OrderController@updateorder');
-    Route::get('/order-search','App\Http\Controllers\Admin\OrderController@search');
-    Route::post('/order-search','App\Http\Controllers\Admin\OrderController@ordersearch');
+    Route::get('/orders-search','App\Http\Controllers\Admin\OrderController@search');
+    Route::post('/orders-search','App\Http\Controllers\Admin\OrderController@ordersearch');
 });

@@ -16,7 +16,7 @@ Orders
                 <div class="row">
                     <div class="col-md-10"></div>
                     <div class="col-md-2 float-end">
-                        <form action="{{url('/order-search')}}" method="post">
+                        <form action="{{url('/orders-search')}}" method="post">
                             @csrf
                             <div class="input-group no-border">
                                 <input type="text" value="" name="order_search" class="form-control"

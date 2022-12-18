@@ -34,27 +34,26 @@ class CategoryController extends Controller
     }
     public function insert(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required|string|max:40|min:5',
-        //     'description' => 'required|string|max:500|min:5',
-        //     'image' => 'required|image',
-        // ]);
-        // $category = new Category();
-        // if ($request->hasFile('image')) {
-        //     $file = $request->file('image');
-        //     $ext = $file->getClientOriginalExtension();
-        //     $filename = time() . '.' . $ext;
-        //     $file->move('assets/uploads/category/', $filename);
-        //     $category->image = $filename;
-        // }
-        // $category->name = $request->input('name');
-        // $category->slug = Str::random(15);
-        // $category->description = $request->input('description');
-        // $category->status = $request->input('status') == TRUE ? '1' : '0';
-        // $category->popular = $request->input('popular') == TRUE ? '1' : '0';
-        // $category->save();
-        // return redirect('/categories')->with('status', "Category Added Successfully");
-        dd($request->image);
+        $request->validate([
+            'name' => 'required|string|max:40|min:5',
+            'description' => 'required|string|max:500|min:5',
+            'image' => 'required|image',
+        ]);
+        $category = new Category();
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $ext;
+            $file->move('assets/uploads/category/', $filename);
+            $category->image = $filename;
+        }
+        $category->name = $request->input('name');
+        $category->slug = Str::random(15);
+        $category->description = $request->input('description');
+        $category->status = $request->input('status') == TRUE ? '1' : '0';
+        $category->popular = $request->input('popular') == TRUE ? '1' : '0';
+        $category->save();
+        return redirect('/categories')->with('status', "Category Added Successfully");
     }
     public function edit($slug)
     {
@@ -107,7 +106,7 @@ class CategoryController extends Controller
         $search = $request->cate_search;
         if ($search != '') {
             $search = str_replace(" ", "%", $search);
-            $category = Category::where('name', "LIKE", "%$search%")->orWhere('description', "LIKE", "%$search%")->orderby('id', 'asc')->paginate(1);
+            $category = Category::where('name', "LIKE", "%$search%")->orWhere('description', "LIKE", "%$search%")->paginate(1);
             if ($category) {
                 return view('admin.category.search', compact('category', 'search'));
             }

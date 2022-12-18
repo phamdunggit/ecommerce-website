@@ -17,8 +17,25 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate(1);
+        $products = Product::orderby('id', 'asc')->paginate(1);
         return view('admin.product.index', compact('products'));
+    }
+    function fetch_data(Request $request)
+    {
+        if ($request->ajax()) {
+            $search = $request->get('query');
+            $search = str_replace(" ", "%", $search);
+            $sort_by = $request->get('sortby');
+            $sort_type = $request->get('sorttype');
+            $products = Product::leftJoin('categories', 'products.cate_id', '=', 'categories.id')
+            ->select('products.*', 'categories.name as cate_name')
+            ->where('products.name', "LIKE", "%$search%")
+            ->orWhere('products.description', "LIKE", "%$search%")
+            ->orWhere('categories.name', "LIKE", "%$search%")
+            ->orderBy($sort_by, $sort_type)
+                ->paginate(1);
+            return view('admin.product.data', compact('products'))->render();
+        }
     }
     public function add()
     {

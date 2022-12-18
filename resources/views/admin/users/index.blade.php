@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-10"></div>
             <div class="col-md-2 float-end">
-                <form action="{{url('/user-search')}}" method="post">
+                <form action="{{url('/users-search')}}" method="post">
                     @csrf
                     <div class="input-group no-border">
                         <input type="text" value="" name="user_search" class="form-control"
