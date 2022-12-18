@@ -1,10 +1,10 @@
 <table id="table" class="table table-bordered table-striped">
     <thead>
         <tr>
-            <th class="sorting"  data-column_name="name"">Name</th>
-            <th class="sorting"  data-column_name="category">Category</th>
-            <th class="sorting"  data-column_name="description"">Description</th>
-            <th class="sorting"  data-column_name="selling_price"">Selling Price</th>
+            <th class="sorting"  data-column_name="name" style="cursor: pointer">Name</th>
+            <th class="sorting"  data-column_name="category" style="cursor: pointer">Category</th>
+            <th class="sorting"  data-column_name="description" style="cursor: pointer">Description</th>
+            <th class="sorting"  data-column_name="selling_price" style="cursor: pointer">Selling Price</th>
             <th>Image</th>
             <th>Action</th>
         </tr>

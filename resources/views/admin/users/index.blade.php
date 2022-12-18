@@ -12,8 +12,7 @@
                 <form action="{{url('/users-search')}}" method="post">
                     @csrf
                     <div class="input-group no-border">
-                        <input type="text" value="" name="user_search" class="form-control"
-                            placeholder="Search...">
+                        <input type="text" value="" name="user_search" class="form-control" placeholder="Search...">
                         <button type="submit" class="btn btn-white btn-round btn-just-icon">
                             <i class="material-icons">search</i>
                             <div class="ripple-container"></div>
@@ -22,32 +21,13 @@
                 </form>
             </div>
         </div>
-        <table id="table" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th onclick="sortTable(0)">Name</th>
-                    <th onclick="sortTable(1)">Email</th>
-                    <th onclick="sortTable(2)">Phone</th>
-                    <th >Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($users as $item)
-                <tr>
-                    <td>{{ $item->fname.' '.$item->lname }}</td>
-                    <td>{{ $item->email }}</td>
-                    <td>{{ $item->phone }}</td>
-                    <td>
-                        <a href="{{ url('/view-user/'.$item->id) }}" class="btn btn-primary btn-sm">View</a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <div class="row">
-            <div class="col-md-9"></div>
-            <div class="col-md-3">{{ $users->onEachSide(5)->links() }}</div>
+        <div class="table">
+            @include('admin.users.data')
         </div>
+        <input type="hidden" name="hidden_search_input" id="hidden_search_input" value="" />
+        <input type="hidden" name="hidden_page" id="hidden_page" value="1" />
+        <input type="hidden" name="hidden_column_name" id="hidden_column_name" value="fname" />
+        <input type="hidden" name="hidden_sort_type" id="hidden_sort_type" value="asc" />
     </div>
 </div>
 @endsection

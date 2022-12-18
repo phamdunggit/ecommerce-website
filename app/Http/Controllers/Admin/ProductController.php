@@ -17,7 +17,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::orderby('id', 'asc')->paginate(1);
+        $products = Product::orderby('name', 'asc')->paginate(1);
         return view('admin.product.index', compact('products'));
     }
     function fetch_data(Request $request)
@@ -224,16 +224,17 @@ class ProductController extends Controller
     }
     public function prodsearch(Request $request)
     {
-        $search_prod=$request->prod_search;
-        if ($search_prod!='') {
+        $search=$request->prod_search;
+        if ($search!='') {
             $products=Product::leftJoin('categories', 'products.cate_id', '=', 'categories.id')
             ->select('products.*', 'categories.name as cate_name')
-            ->where('products.name',"LIKE","%$search_prod%")
-            ->orWhere('products.description',"LIKE","%$search_prod%")
-            ->orWhere('categories.name',"LIKE","%$search_prod%")
+            ->where('products.name',"LIKE","%$search%")
+            ->orWhere('products.description',"LIKE","%$search%")
+            ->orWhere('categories.name',"LIKE","%$search%")
+            ->orderby('name', 'asc')
             ->paginate(1);
             if($products){
-                return view('admin.product.search',compact('products'));
+                return view('admin.product.search',compact('products','search'));
             }
         } else {
             return redirect()->back();

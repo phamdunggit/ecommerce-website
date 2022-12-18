@@ -81,7 +81,9 @@ Route::middleware('auth','isAdmin','verified')->group(function(){
     Route::get('/products-search','App\Http\Controllers\Admin\ProductController@search');
     Route::post('/products-search','App\Http\Controllers\Admin\ProductController@prodsearch');
     //User
+    
     Route::get('/users','App\Http\Controllers\Admin\DashboardController@users');
+    Route::get('/users/fetch_data', 'App\Http\Controllers\Admin\DashboardController@fetch_data');
     Route::get('/view-user/{id}','App\Http\Controllers\Admin\DashboardController@viewuser');
     Route::get('/user-search','App\Http\Controllers\Admin\DashboardController@search');
     Route::post('/users-search','App\Http\Controllers\Admin\DashboardController@usersearch');
@@ -89,6 +91,7 @@ Route::middleware('auth','isAdmin','verified')->group(function(){
     Route::post('/users-search','App\Http\Controllers\Admin\DashboardController@usersearch');
     //Order
     Route::get('/orders','App\Http\Controllers\Admin\OrderController@index');
+    Route::get('/orders/fetch_data', 'App\Http\Controllers\Admin\OrderController@fetch_data');
     Route::get('/admin/view-order/{id}','App\Http\Controllers\Admin\OrderController@view');
     Route::get('/order-history','App\Http\Controllers\Admin\OrderController@orderhistory');
     Route::put('/update-order/{id}','App\Http\Controllers\Admin\OrderController@updateorder');

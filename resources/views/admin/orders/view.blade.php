@@ -72,8 +72,8 @@ My Orders
                                     @method('PUT')
                                     
                                     <select class="form-select" name="order-status" aria-label="Default select example">
-                                        <option {{$orders->status=='0'?'selected ':''}} value="0">Pending</option>
-                                        <option {{$orders->status=='1'?'selected ':''}}value="1">Completed</option>
+                                        <option {{$orders->status=='1'?'selected ':''}} value="1">Pending</option>
+                                        <option {{$orders->status=='2'?'selected ':''}}value="2">Completed</option>
                                     </select>
                                     <button type="submit" class="btn btn-primary float-right mt-3">Update</button>
                                 </form>

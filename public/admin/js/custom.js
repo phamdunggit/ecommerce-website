@@ -11,7 +11,7 @@ $(document).ready(function () {
         url = "/users/fetch_data?";
     }
 
-    function fetch_data(page, sort_type, sort_by, query) {
+    function fetch_data(page, sort_type, sort_by, query, status) {
         $.ajax({
             url:
                 url +
@@ -20,7 +20,11 @@ $(document).ready(function () {
                 "&sortby=" +
                 sort_by +
                 "&sorttype=" +
-                sort_type+"&query="+query,
+                sort_type +
+                "&query=" +
+                query +
+                "&status=" +
+                status,
             success: function (data) {
                 console.log(sort_by);
                 $(".table").html("");
@@ -53,20 +57,30 @@ $(document).ready(function () {
         $("#hidden_sort_type").val(reverse_order);
         var page = $("#hidden_page").val();
         var query = $("#hidden_search_input").val();
-        fetch_data(page, reverse_order, column_name, query);
+        var status = $("#status").val();
+        fetch_data(page, reverse_order, column_name, query, status);
     });
 
     $(document).on("click", ".pagination a", function (event) {
         event.preventDefault();
         var page = $(this).attr("href").split("page=")[1];
-        console.log(page)
-        $('#hidden_page').val(page);
+        console.log(page);
+        $("#hidden_page").val(page);
         var column_name = $("#hidden_column_name").val();
         var sort_type = $("#hidden_sort_type").val();
         var query = $("#hidden_search_input").val();
-
+        var status = $("#status").val();
         $("li").removeClass("active");
         $(this).parent().addClass("active");
-        fetch_data(page, sort_type, column_name, query);
+        fetch_data(page, sort_type, column_name, query, status);
+    });
+    $(document).on("change", "#status", function (event) {
+        event.preventDefault();
+        var status = $("#status").val();
+        var column_name = $("#hidden_column_name").val();
+        var sort_type = $("#hidden_sort_type").val();
+        var query = $("#hidden_search_input").val();
+        var page = $("#hidden_page").val();
+        fetch_data(page, sort_type, column_name, query, status);
     });
 });

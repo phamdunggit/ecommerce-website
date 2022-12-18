@@ -12,7 +12,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $category = Category::orderby('id', 'asc')->paginate(1);
+        $category = Category::orderby('name', 'asc')->paginate(1);
         return view('admin.category.index', compact('category'));
     }
     function fetch_data(Request $request)
@@ -106,7 +106,7 @@ class CategoryController extends Controller
         $search = $request->cate_search;
         if ($search != '') {
             $search = str_replace(" ", "%", $search);
-            $category = Category::where('name', "LIKE", "%$search%")->orWhere('description', "LIKE", "%$search%")->paginate(1);
+            $category = Category::where('name', "LIKE", "%$search%")->orWhere('description', "LIKE", "%$search%")->orderby('name', 'asc')->paginate(1);
             if ($category) {
                 return view('admin.category.search', compact('category', 'search'));
             }
