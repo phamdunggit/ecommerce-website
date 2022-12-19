@@ -38,6 +38,7 @@
     <script src="{{ asset('admin/js/perfect-scrollbar.jquery.min.js')}}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{ asset('admin/js/custom.js')}}" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js" integrity="sha256-CgvH7sz3tHhkiVKh05kSUgG97YtzYNnWt6OXcmYzqHY=" crossorigin="anonymous"></script>
     @if(session('status'))
     <script>
         swal({

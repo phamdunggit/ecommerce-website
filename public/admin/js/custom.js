@@ -1,54 +1,86 @@
-function sortTable(n) {
-    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    table = document.getElementById("table");
-    switching = true;
-    //Set the sorting direction to ascending:
-    dir = "asc"; 
-    /*Make a loop that will continue until
-    no switching has been done:*/
-    while (switching) {
-      //start by saying: no switching is done:
-      switching = false;
-      rows = table.rows;
-      /*Loop through all table rows (except the
-      first, which contains table headers):*/
-      for (i = 1; i < (rows.length - 1); i++) {
-        //start by saying there should be no switching:
-        shouldSwitch = false;
-        /*Get the two elements you want to compare,
-        one from current row and one from the next:*/
-        x = rows[i].getElementsByTagName("TD")[n];
-        y = rows[i + 1].getElementsByTagName("TD")[n];
-        /*check if the two rows should switch place,
-        based on the direction, asc or desc:*/
-        if (dir == "asc") {
-          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-            //if so, mark as a switch and break the loop:
-            shouldSwitch= true;
-            break;
-          }
-        } else if (dir == "desc") {
-          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-            //if so, mark as a switch and break the loop:
-            shouldSwitch = true;
-            break;
-          }
-        }
-      }
-      if (shouldSwitch) {
-        /*If a switch has been marked, make the switch
-        and mark that a switch has been done:*/
-        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-        switching = true;
-        //Each time a switch is done, increase this count by 1:
-        switchcount ++;      
-      } else {
-        /*If no switching has been done AND the direction is "asc",
-        set the direction to "desc" and run the while loop again.*/
-        if (switchcount == 0 && dir == "asc") {
-          dir = "desc";
-          switching = true;
-        }
-      }
+$(document).ready(function () {
+    var url;
+    var currenturl = window.location.href;
+    if (currenturl.search("categories") != "-1") {
+        url = "/categories/fetch_data?";
+    } else if (currenturl.search("products") != "-1") {
+        url = "/products/fetch_data?";
+    } else if (currenturl.search("orders") != "-1") {
+        url = "/orders/fetch_data?";
+    } else if (currenturl.search("users") != "-1") {
+        url = "/users/fetch_data?";
     }
-  }
+
+    function fetch_data(page, sort_type, sort_by, query, status) {
+        $.ajax({
+            url:
+                url +
+                "page=" +
+                page +
+                "&sortby=" +
+                sort_by +
+                "&sorttype=" +
+                sort_type +
+                "&query=" +
+                query +
+                "&status=" +
+                status,
+            success: function (data) {
+                console.log(sort_by);
+                $(".table").html("");
+                $(".table").html(data);
+            },
+        });
+    }
+
+    // $(document).on('click', '.search', function(){
+    //  var query = $('.search').val();
+    //  var column_name = $('#hidden_column_name').val();
+    //  var sort_type = $('#hidden_sort_type').val();
+    //  var page = $('#hidden_page').val();
+    //  fetch_data(page, sort_type, column_name, query);
+    // });
+
+    $(document).on("click", ".sorting", function () {
+        console.log($("#hidden_sort_type").val());
+        var column_name = $(this).data("column_name");
+        var order_type = $("#hidden_sort_type").val();
+        var reverse_order = "";
+        if (order_type == "asc") {
+            $(this).data("sorting_type", "desc");
+            reverse_order = "desc";
+        } else if (order_type == "desc") {
+            $(this).data("sorting_type", "asc");
+            reverse_order = "asc";
+        }
+        $("#hidden_column_name").val(column_name);
+        $("#hidden_sort_type").val(reverse_order);
+        var page = $("#hidden_page").val();
+        var query = $("#hidden_search_input").val();
+        var status = $("#status").val();
+        fetch_data(page, reverse_order, column_name, query, status);
+    });
+
+    $(document).on("click", ".pagination a", function (event) {
+        event.preventDefault();
+        var page = $(this).attr("href").split("page=")[1];
+        console.log(page);
+        $("#hidden_page").val(page);
+        var column_name = $("#hidden_column_name").val();
+        var sort_type = $("#hidden_sort_type").val();
+        var query = $("#hidden_search_input").val();
+        var status = $("#status").val();
+        $("li").removeClass("active");
+        $(this).parent().addClass("active");
+        fetch_data(page, sort_type, column_name, query, status);
+    });
+    $(document).on("change", "#status", function (event) {
+        event.preventDefault();
+        var status = $("#status").val();
+        var column_name = $("#hidden_column_name").val();
+        var sort_type = $("#hidden_sort_type").val();
+        var query = $("#hidden_search_input").val();
+        var page = $("#hidden_page").val();
+        fetch_data(page, sort_type, column_name, query, status);
+    });
+});
