@@ -45,6 +45,7 @@
     <script src="{{ asset('frontend/js/custom.js')}}"></script>
     <script src="{{ asset('frontend/js/avatar_upload.js')}}"></script>
     <script src="{{ asset('frontend/js/api_province.js')}}"></script>
+    <script src="{{ asset('frontend/js/sort.js')}}"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js" integrity="sha256-CgvH7sz3tHhkiVKh05kSUgG97YtzYNnWt6OXcmYzqHY=" crossorigin="anonymous"></script>
     <script>
