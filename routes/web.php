@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/','App\Http\Controllers\Frontend\FrontendController@index');
 Route::get('/category','App\Http\Controllers\Frontend\FrontendController@category');
 Route::get('/category/{slug}','App\Http\Controllers\Frontend\FrontendController@viewcategory');
+Route::get('/cate/fetch_data','App\Http\Controllers\Frontend\FrontendController@fetchdata');
 Route::get('/category/{cate_slug}/{prod_clug}','App\Http\Controllers\Frontend\FrontendController@productview');
 Route::post('/add-to-cart','App\Http\Controllers\Frontend\CartController@addProduct');
 Route::post('/delete-cart-item','App\Http\Controllers\Frontend\CartController@deleteProduct');
@@ -30,6 +31,7 @@ Route::post('/delete-wishlist-item','App\Http\Controllers\Frontend\WishlistContr
 Route::get('/product-list','App\Http\Controllers\Frontend\FrontendController@productlistAjax');
 Route::get('/search','App\Http\Controllers\Frontend\FrontendController@search');
 Route::post('/search-product','App\Http\Controllers\Frontend\FrontendController@searchProduct');
+Route::get('/search-product/fetch_data','App\Http\Controllers\Frontend\FrontendController@fetchdata');
 
 Route::middleware('auth','verified')->group(function(){
     Route::get('/cart','App\Http\Controllers\Frontend\CartController@viewcart');
