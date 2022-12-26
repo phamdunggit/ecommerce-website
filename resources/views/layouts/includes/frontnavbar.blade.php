@@ -8,7 +8,7 @@
           <form action="{{url('/search-product')}}" method="post">
             @csrf
             <a href="" class="link-search" target="_blank" hidden></a>
-            <input class="search-input" name="product_name" type="text" placeholder="Type to search..">
+            <input class="search-input" name="product_name" type="text" placeholder="Type to search.." required>
             <div class="autocom-box">
               <!-- here list are inserted from javascript -->
             </div>
